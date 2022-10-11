@@ -101,7 +101,7 @@ type Configuration struct {
 		Labels   map[string]string `json:"labels"`
 		Sequence []sequence        `json:"sequence"`
 	} `json:"metrics"`
-	OutputDir       string    `json:"output_dir"`        // The directory to place the generated TSDB blocks. Default /tmp/tsdb.
+	OutputDir       string    `json:"output_dir"`        // The directory to place the generated TSDB blocks. Default /prometheus
 	SampleInterval	Duration  `json:"sample_interval"` // How often to sample the metrics. Default 30s.
 	BlockLength		Duration  `json:"block_length"`    // The length of time each block will cover. Default 2 hours.
 	StartTime		time.Time `json:"start_time"`	  // Metrics will be produced from this time. Default 1 week.
@@ -120,7 +120,7 @@ type timeseries struct {
 
 func CreateThanosTSDB(config Configuration) error {
 	if config.OutputDir == "" {
-		config.OutputDir = "/tmp/tsdb"
+		config.OutputDir = "/prometheus"
 	}
 
 	now := time.Now()

@@ -1,6 +1,6 @@
 module json2tsdb
 
-go 1.13
+go 1.16
 
 require (
 	github.com/oklog/ulid v1.3.1
