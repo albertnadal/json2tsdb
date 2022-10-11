@@ -11,7 +11,7 @@
          "sequence": [
             {
                "time": "2022-10-06T12:00:00Z",
-               "value": 11
+               "value": 41
             },
             {
                "time": "2022-10-06T12:00:30Z",
@@ -91,7 +91,6 @@
          ]
       }
    ],
-   "output_dir": "data",
    "start_time": "2022-10-06T10:00:00Z",
    "end_time": "2022-10-06T14:00:00Z",
    "sample_interval": "30s",
