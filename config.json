@@ -1,0 +1,99 @@
+{
+   "metrics":[
+      {
+         "name": "nats_consumer_num_pending",
+         "labels": {
+            "consumer_name": "processor-slow-20039786-c0cf-4afe-b5a3-d23d67f44bbe",
+            "domain": "regional",
+            "stream_name": "ingest",
+            "is_consumer_leader": "true"
+         },
+         "sequence": [
+            {
+               "time": "2022-10-06T12:00:00Z",
+               "value": 11
+            },
+            {
+               "time": "2022-10-06T12:00:30Z",
+               "value": 11
+            },
+            {
+               "time": "2022-10-06T12:01:00Z",
+               "value": 10
+            },
+            {
+               "time": "2022-10-06T12:01:30Z",
+               "value": 10
+            },
+            {
+               "time": "2022-10-06T12:02:00Z",
+               "value": 10
+            },
+            {
+               "time": "2022-10-06T12:02:30Z",
+               "value": 10
+            },
+            {
+               "time": "2022-10-06T12:03:00Z",
+               "value": 10
+            },
+            {
+               "time": "2022-10-06T12:03:30Z",
+               "value": 9
+            },
+            {
+               "time": "2022-10-06T12:04:00Z",
+               "value": 9
+            },
+            {
+               "time": "2022-10-06T12:04:30Z",
+               "value": 5
+            },
+            {
+               "time": "2022-10-06T12:05:00Z",
+               "value": 5
+            },
+            {
+               "time": "2022-10-06T12:05:30Z",
+               "value": 2
+            },
+            {
+               "time": "2022-10-06T12:05:00Z",
+               "value": 1
+            },
+            {
+               "time": "2022-10-06T12:05:30Z",
+               "value": 1
+            },
+            {
+               "time": "2022-10-06T12:06:00Z",
+               "value": 0
+            }
+         ]
+      },
+      {
+         "name": "test",
+         "labels": {
+            "consumer_name": "processor-slow-1234-1234-1234-1234",
+            "domain": "regional",
+            "stream_name": "ingest",
+            "is_consumer_leader": "true"
+         },
+         "sequence": [
+            {
+               "time": "2022-10-06T10:00:00Z",
+               "value": 10.0
+            },
+            {
+               "time": "2022-10-06T10:00:30Z",
+               "value": 11.0
+            }
+         ]
+      }
+   ],
+   "output_dir": "data",
+   "start_time": "2022-10-06T10:00:00Z",
+   "end_time": "2022-10-06T14:00:00Z",
+   "sample_interval": "30s",
+   "block_length": "2h"
+}
