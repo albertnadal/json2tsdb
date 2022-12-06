@@ -1,16 +1,14 @@
 package main
 
 import (
-	"log"
-	"os"
 	"encoding/json"
 	"json2tsdb/tsdb"
+	"log"
+	"os"
 )
-
 
 func main() {
 	log.Printf("Generate Prometheus TSDB data.")
-
 	config := tsdb.Configuration{}
 	configValues := os.Getenv("METRICS_CONFIG")
 
@@ -21,8 +19,7 @@ func main() {
 
 	if err := tsdb.CreateThanosTSDB(config); err != nil {
 		log.Fatalf("Error generating TSDB data: %s", err)
-        panic(err)
-    }
-
+		panic(err)
+	}
 	log.Printf("TSDB data generation complete")
 }

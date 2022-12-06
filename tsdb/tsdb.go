@@ -1,12 +1,12 @@
 package tsdb
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"math/rand"
 	"path/filepath"
 	"time"
-	"encoding/json"
 
 	"github.com/oklog/ulid"
 	"github.com/pkg/errors"
@@ -62,37 +62,37 @@ const (
 )
 
 type Duration struct {
-    time.Duration
+	time.Duration
 }
 
 func (d Duration) MarshalJSON() ([]byte, error) {
-    return json.Marshal(d.String())
+	return json.Marshal(d.String())
 }
 
 func (d *Duration) UnmarshalJSON(b []byte) error {
-    var v interface{}
-    if err := json.Unmarshal(b, &v); err != nil {
-        return err
-    }
-    switch value := v.(type) {
-		case float64:
-			d.Duration = time.Duration(value)
-			return nil
-		case string:
-			var err error
-			d.Duration, err = time.ParseDuration(value)
-			if err != nil {
-				return err
-			}
-			return nil
-		default:
-			return errors.New("invalid duration")
-    }
+	var v interface{}
+	if err := json.Unmarshal(b, &v); err != nil {
+		return err
+	}
+	switch value := v.(type) {
+	case float64:
+		d.Duration = time.Duration(value)
+		return nil
+	case string:
+		var err error
+		d.Duration, err = time.ParseDuration(value)
+		if err != nil {
+			return err
+		}
+		return nil
+	default:
+		return errors.New("invalid duration")
+	}
 }
 
 type sequence struct {
-	Time   time.Time `json:"time"`
-	Value  float64   `json:"value"`
+	Time  time.Time `json:"time"`
+	Value float64   `json:"value"`
 }
 
 type Configuration struct {
@@ -101,11 +101,11 @@ type Configuration struct {
 		Labels   map[string]string `json:"labels"`
 		Sequence []sequence        `json:"sequence"`
 	} `json:"metrics"`
-	OutputDir       string    `json:"output_dir"`        // The directory to place the generated TSDB blocks. Default /prometheus
-	SampleInterval	Duration  `json:"sample_interval"` // How often to sample the metrics. Default 30s.
-	BlockLength		Duration  `json:"block_length"`    // The length of time each block will cover. Default 2 hours.
-	StartTime		time.Time `json:"start_time"`	  // Metrics will be produced from this time. Default 1 week.
-	EndTime         time.Time `json:"end_time"`       // Metrics will be produced until this time. Default now.
+	OutputDir      string    `json:"output_dir"`      // The directory to place the generated TSDB blocks. Default /prometheus
+	SampleInterval Duration  `json:"sample_interval"` // How often to sample the metrics. Default 30s.
+	BlockLength    Duration  `json:"block_length"`    // The length of time each block will cover. Default 2 hours.
+	StartTime      time.Time `json:"start_time"`      // Metrics will be produced from this time. Default 1 week.
+	EndTime        time.Time `json:"end_time"`        // Metrics will be produced until this time. Default now.
 }
 
 type timeseries struct {
@@ -194,10 +194,10 @@ func createEmptyTimeseries(config Configuration) []*timeseries {
 	series := make([]*timeseries, len(config.Metrics))
 	for i := 0; i < len(config.Metrics); i++ {
 		series[i] = &timeseries{
-			ID:   uint64(i),
-			Name: config.Metrics[i].Name,
-			Labels: config.Metrics[i].Labels,
-			Sequence: config.Metrics[i].Sequence,
+			ID:                   uint64(i),
+			Name:                 config.Metrics[i].Name,
+			Labels:               config.Metrics[i].Labels,
+			Sequence:             config.Metrics[i].Sequence,
 			currentSequenceIndex: 0,
 			currentSequenceValue: 0,
 		}
@@ -240,7 +240,7 @@ func populateChunks(series []*timeseries, outputDir string, blockStart time.Time
 						serie.currentSequenceValue = sampleInSequence.Value
 						app.Append(sampleInSequence.Time.Unix()*1000, serie.currentSequenceValue)
 						serie.currentSequenceIndex = index + 1
-						sampleInSequenceFound= true
+						sampleInSequenceFound = true
 						break
 					}
 				}
@@ -305,10 +305,10 @@ func createIndex(series []*timeseries, outputDir string, seriesStartIndex int, t
 	}
 
 	symbols := map[string]struct{}{
-		"": {},
+		"":         {},
 		"__name__": {},
 		"instance": {},
-		"job": {},
+		"job":      {},
 	}
 
 	for _, serie := range series {
